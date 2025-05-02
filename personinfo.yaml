@@ -12,10 +12,15 @@ classes:
       id:
       full_name:
       aliases:
+        multivalued: true
+        # inlined_as_list: true
+        # range: string
       phone:
       age:
   Container:
     tree_root: true
+    # description:
+    # name:
     attributes:
       persons:
         multivalued: true
