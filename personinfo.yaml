@@ -10,13 +10,21 @@ classes:
   Person:
     attributes:
       id:
+        identifier: true
       full_name:
+        required: true
+        description: The full name of the person
       aliases:
         multivalued: true
+        description: A list of aliases for the person
         # inlined_as_list: true
         # range: string
       phone:
+        pattern: "^[\\d\\(\\)\\-]+$"
       age:
+        range: integer
+        minimum_value: 0
+        maximum_value: 120
   Container:
     tree_root: true
     description: A container for persons
