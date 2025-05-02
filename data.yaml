@@ -6,6 +6,8 @@ persons:
     aliases:
       - Superman
       - Clark
+    status: ALIVE
   - id: ORCID:4567
     full_name: Lois Lane
     age: 118
+    status: UNKNOWN
