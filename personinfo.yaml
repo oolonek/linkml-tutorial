@@ -2,11 +2,9 @@ id: https://w3id.org/linkml/examples/personinfo
 name: personinfo
 prefixes:
   linkml: https://w3id.org/linkml/
-  personinfo: https://w3id.org/linkml/examples/personinfo
 imports:
   - linkml:types
 default_range: string
-default_prefix: personinfo
 
 classes:
   Person:
@@ -16,5 +14,10 @@ classes:
       aliases:
       phone:
       age:
-      occupation:
-      employed_by:
+  Container:
+    tree_root: true
+    attributes:
+      persons:
+        multivalued: true
+        inlined_as_list: true
+        range: Person
