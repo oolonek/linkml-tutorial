@@ -19,8 +19,8 @@ classes:
       age:
   Container:
     tree_root: true
-    # description:
-    # name:
+    description: A container for persons
+    name: Container
     attributes:
       persons:
         multivalued: true
