@@ -1,5 +1,5 @@
 # Auto generated from personinfo.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-05-02T17:21:41
+# Generation date: 2025-05-03T14:42:20
 # Schema: personinfo
 #
 # id: https://w3id.org/linkml/examples/personinfo
@@ -63,6 +63,7 @@ version = None
 
 # Namespaces
 ORCID = CurieNamespace('ORCID', 'https://orcid.org/')
+PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 PERSONINFO = CurieNamespace('personinfo', 'https://w3id.org/linkml/examples/personinfo/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
@@ -90,6 +91,7 @@ class Person(YAMLRoot):
     aliases: Optional[Union[str, list[str]]] = empty_list()
     phone: Optional[str] = None
     age: Optional[int] = None
+    status: Optional[Union[str, "PersonStatus"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -112,6 +114,9 @@ class Person(YAMLRoot):
         if self.age is not None and not isinstance(self.age, int):
             self.age = int(self.age)
 
+        if self.status is not None and not isinstance(self.status, PersonStatus):
+            self.status = PersonStatus(self.status)
+
         super().__post_init__(**kwargs)
 
 
@@ -133,7 +138,23 @@ class Container(YAMLRoot):
 
 
 # Enumerations
+class PersonStatus(EnumDefinitionImpl):
 
+    ALIVE = PermissibleValue(
+        text="ALIVE",
+        description="the person is living",
+        meaning=PATO["0001421"])
+    DEAD = PermissibleValue(
+        text="DEAD",
+        description="the person is deceased",
+        meaning=PATO["0001422"])
+    UNKNOWN = PermissibleValue(
+        text="UNKNOWN",
+        description="the vital status is not known")
+
+    _defn = EnumDefinition(
+        name="PersonStatus",
+    )
 
 # Slots
 class slots:
@@ -154,6 +175,9 @@ slots.person__phone = Slot(uri=SCHEMA.telephone, name="person__phone", curie=SCH
 
 slots.person__age = Slot(uri=PERSONINFO.age, name="person__age", curie=PERSONINFO.curie('age'),
                    model_uri=PERSONINFO.person__age, domain=None, range=Optional[int])
+
+slots.person__status = Slot(uri=PERSONINFO.status, name="person__status", curie=PERSONINFO.curie('status'),
+                   model_uri=PERSONINFO.person__status, domain=None, range=Optional[Union[str, "PersonStatus"]])
 
 slots.container__persons = Slot(uri=PERSONINFO.persons, name="container__persons", curie=PERSONINFO.curie('persons'),
                    model_uri=PERSONINFO.container__persons, domain=None, range=Optional[Union[dict[Union[str, PersonId], Union[dict, Person]], list[Union[dict, Person]]]])
